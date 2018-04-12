@@ -21,10 +21,6 @@ public class SchoolsController {
 
 	@Autowired
 	private SchoolRepository schoolRepository;
-	@Autowired
-	private SchoolClassRepository schoolClassrepository;
-	@Autowired
-	private StudentRepository studentrepository;
 	
     @RequestMapping(value="/Schools")
     public String listSchools(Model model, HttpSession session) {    	
