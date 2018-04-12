@@ -41,11 +41,11 @@
 		</dependency>
 
 		<!-- SECURITY -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
+ -->
 		<!-- THYMELEAF -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,11 +80,11 @@
 		</dependency>
 
 		<!-- TESTS SECURITY -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 
 		<!-- SQLITE -->
 		<dependency>
