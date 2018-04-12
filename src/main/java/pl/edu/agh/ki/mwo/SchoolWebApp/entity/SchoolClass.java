@@ -21,6 +21,11 @@ public class SchoolClass implements java.io.Serializable {
 	@Column
 	private String profile;
 	
+	@Column
+	@ManyToOne
+	@JoinColumn(name="school_id", referencedColumnName="id")
+	private School school;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="class_id")
 	private Set<Student> students;
@@ -72,6 +77,13 @@ public class SchoolClass implements java.io.Serializable {
 		this.profile = profile;
 	}
 
+	public School getSchool() {
+		return school;
+	}
+	public void setSchool(School school) {
+		this.school = school;
+	}
+	
 	public String toString() {
 		return "Class: " + profile + " (Started: " + getStartYear() + ", Current year: " + getCurrentYear() + ")";
 	}

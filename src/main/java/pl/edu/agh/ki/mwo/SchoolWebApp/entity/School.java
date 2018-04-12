@@ -18,8 +18,7 @@ public class School implements java.io.Serializable {
 	@Column
 	private String address;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="school_id", referencedColumnName="id")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="school")
 	private Set<SchoolClass> schoolClasses;
 
 	public School() {
@@ -60,6 +59,13 @@ public class School implements java.io.Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public void addSchoolClass(SchoolClass schoolClass) {
+		if (this.schoolClasses==null) {
+			this.schoolClasses=new HashSet<SchoolClass>();
+		}
+		this.schoolClasses.add(schoolClass);
 	}
 	
 	public String toString() {
