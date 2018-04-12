@@ -66,6 +66,7 @@ public class School implements java.io.Serializable {
 			this.schoolClasses=new HashSet<SchoolClass>();
 		}
 		this.schoolClasses.add(schoolClass);
+		schoolClass.setSchool(this);
 	}
 	
 	public String toString() {

@@ -58,10 +58,12 @@ public class SchoolClassesController {
     	schoolClass.setStartYear(Integer.valueOf(startYear));
     	schoolClass.setCurrentYear(Integer.valueOf(currentYear));
     	schoolClass.setProfile(profile);
+    	School school=schoolRepository.findById(Long.valueOf(schoolId)).get();
+    	schoolClass.setSchool(school);
     	
     	//DatabaseConnector.getInstance().addSchoolClass(schoolClass, schoolId);
     	schoolClassRepository.save(schoolClass);
-       	model.addAttribute("schoolClasses", schoolClassRepository);
+       	model.addAttribute("schoolClasses", schoolClassRepository.findAll());
     	model.addAttribute("message", "Nowa klasa została dodana");
          	
     	return "schoolClassesList";
