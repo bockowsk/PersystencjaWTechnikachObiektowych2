@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pl.edu.agh.ki.mwo.SchoolWebApp.repository.SchoolClassRepository;
 import pl.edu.agh.ki.mwo.SchoolWebApp.repository.StudentRepository;
 
 @Controller
@@ -16,6 +17,8 @@ public class StudentController {
 
 		@Autowired
 		private StudentRepository studentRepository;
+		@Autowired 
+		private SchoolClassRepository schoolClassRepository;
 		
 		@RequestMapping(value="/Students")
 		public String listStudents(Model model, HttpSession session) {
@@ -45,7 +48,7 @@ public class StudentController {
 	    public String displayAddStudentForm(Model model, HttpSession session) {    	
 	    	if (session.getAttribute("userLogin") == null)
 	    		return "redirect:/Login";
-	    	
+	    	model.addAttribute("classes", schoolClassRepository.findAll());
 	        return "studentForm";    
 	    }
 }
