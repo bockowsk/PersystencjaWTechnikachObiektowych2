@@ -82,8 +82,26 @@ public class SchoolsController {
 
 		School school = schoolRepository.findById(Long.valueOf(schoolId)).get();
 		model.addAttribute("school", school);
-		
+
 		return "schoolUpdateForm";
+	}
+
+	@RequestMapping(value = "/UpdateSchool", method = RequestMethod.POST)
+	public String updateSchool(@RequestParam(value = "schoolName", required = false) String name,
+			@RequestParam(value = "schoolAddress", required = false) String address,
+			@RequestParam(value = "schoolId") String schoolId, Model model, HttpSession session) {
+		if (session.getAttribute("userLogin") == null)
+			return "redirect:/Login";
+
+		School school = schoolRepository.findById(Long.valueOf(schoolId)).get();
+		school.setName(name);
+		school.setAddress(address);
+		//update
+		schoolRepository.save(school);
+		model.addAttribute("schools", schoolRepository.findAll());
+		model.addAttribute("message", "Szkola zaktualizowana");
+
+		return "schoolsList";
 	}
 
 }
