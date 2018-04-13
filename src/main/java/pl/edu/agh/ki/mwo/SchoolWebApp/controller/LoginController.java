@@ -27,4 +27,5 @@ public class LoginController {
     	model.addAttribute("message", "Witamy w systemie Szkoła!");
         return "welcome";
     }
+    
 }

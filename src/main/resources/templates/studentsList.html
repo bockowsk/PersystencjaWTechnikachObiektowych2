@@ -1,17 +1,43 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+</head>
 <body>
-
-
-
-	<span layout:fragment="pageTitle"> - Uczniowie </span>
-
-	<div layout:fragment="content">
-		<div th:include="menuFragment"></div>
+	<div class="container">
+		<br /> 
+		<a href="LogOut" class="btn btn-info btn-lg"> <span
+			class="glyphicon glyphicon-log-out"></span> Wyloguj
+		</a>
 		<br />
-		<Br />
-		<table border="1" cellpadding="5">
+		<ul class="nav nav-pills nav-justified">
+			<li class="active"><a href="Students">Uczniowie</a></li>
+			<li><a href="SchoolClasses">Klasy</a></li>
+			<li><a href="Schools">Szkoly</a></li>
+		</ul>
+		<br />
+		<table class="table table-hover">
 			<tr>
 				<th>Id</th>
 				<th>Nazwa</th>
@@ -31,13 +57,13 @@
 				<td>
 					<form action="DeleteStudent" method="POST">
 						<input type="hidden" name="studentId" th:value="${student.id}" />
-						<button type="submit">Skasuj</button>
+						<button class="btn btn-block btn-danger" type="submit">Skasuj</button>
 					</form>
 				</td>
 				<td>
 					<form action="ShowUpdateStudentForm" method="POST">
 						<input type="hidden" name="studentId" th:value="${student.id}" />
-						<button type="submit">Edytuj</button>
+						<button class="btn btn-block btn-default" type="submit">Edytuj</button>
 					</form>
 				</td>
 
@@ -46,7 +72,8 @@
 
 		</table>
 		<br />
-		<a href='AddStudent'>dodaj studenta</a><br />
+		<a href='AddStudent' class="btn btn-info btn-lg"><span
+			class="glyphicon glyphicon-plus"></span> Dodaj studenta</a><br />
 		<br />
 
 	</div>
