@@ -25,8 +25,7 @@ public class SchoolClass implements java.io.Serializable {
 	@JoinColumn(name="school_id", referencedColumnName="id")
 	private School school;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="class_id")
+	@OneToMany(cascade= {CascadeType.MERGE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},mappedBy="schoolClass")
 	private Set<Student> students;
 
 	public SchoolClass() {

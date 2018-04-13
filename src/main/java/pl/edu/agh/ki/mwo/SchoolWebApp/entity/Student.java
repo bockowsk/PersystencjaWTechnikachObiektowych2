@@ -1,24 +1,30 @@
 package pl.edu.agh.ki.mwo.SchoolWebApp.entity;
+
 import javax.persistence.*;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="students")
+@Table(name = "students")
 public class Student implements java.io.Serializable {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String surname;
-	
+
 	@Column
 	private String pesel;
-	
+
+	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	@JoinColumn(name = "class_id")
+	private SchoolClass schoolClass;
+
 	public long getId() {
 		return id;
 	}
@@ -28,7 +34,7 @@ public class Student implements java.io.Serializable {
 	}
 
 	public Student() {
-		
+
 	}
 
 	public String getName() {
@@ -54,5 +60,13 @@ public class Student implements java.io.Serializable {
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
 	}
-	
+
+	public SchoolClass getSchoolClass() {
+		return schoolClass;
+	}
+
+	public void setSchoolClass(SchoolClass schoolClass) {
+		this.schoolClass = schoolClass;
+	}
+
 }

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pl.edu.agh.ki.mwo.SchoolWebApp.entity.School;
+import pl.edu.agh.ki.mwo.SchoolWebApp.entity.SchoolClass;
+import pl.edu.agh.ki.mwo.SchoolWebApp.entity.Student;
 import pl.edu.agh.ki.mwo.SchoolWebApp.repository.SchoolClassRepository;
 import pl.edu.agh.ki.mwo.SchoolWebApp.repository.StudentRepository;
 
@@ -50,5 +53,30 @@ public class StudentController {
 	    		return "redirect:/Login";
 	    	model.addAttribute("classes", schoolClassRepository.findAll());
 	        return "studentForm";    
+	    }
+	    
+	    @RequestMapping(value="/CreateStudent", method=RequestMethod.POST)
+	    public String createStudent(@RequestParam(value="studentName", required=false) String studentName,
+	    		@RequestParam(value="studentSurname", required=false) String studentSurname,
+	    		@RequestParam(value="studentPesel", required=false) String studentPesel,
+	    		@RequestParam(value="studentClass", required=false) String studentClass,
+	    		Model model, HttpSession session) {    	
+	    	if (session.getAttribute("userLogin") == null)
+	    		return "redirect:/Login";
+	    	
+	    	Student student=new Student();
+	    	student.setName(studentName);
+	    	student.setSurname(studentSurname);
+	    	student.setPesel(studentPesel);
+	    	SchoolClass schoolClass=schoolClassRepository.findById(Long.valueOf(studentClass)).get();
+	    	student.setSchoolClass(schoolClass);
+	    	
+	    	//DatabaseConnector.getInstance().addSchoolClass(schoolClass, schoolId);
+	    	studentRepository.save(student);
+
+	       	model.addAttribute("students", studentRepository.findAll());
+	    	model.addAttribute("message", "Student zostal dodany");
+	         	
+	    	return "studentsList";
 	    }
 }
