@@ -21,66 +21,69 @@ public class SchoolsController {
 
 	@Autowired
 	private SchoolRepository schoolRepository;
-	
-    @RequestMapping(value="/Schools")
-    public String listSchools(Model model, HttpSession session) {    	
-    	if (session.getAttribute("userLogin") == null)
-    		return "redirect:/Login";
 
-    	model.addAttribute("schools", schoolRepository.findAll());
-    	
-        return "schoolsList";    
-    }
-    
-    @RequestMapping(value="/AddSchool")
-    public String displayAddSchoolForm(Model model, HttpSession session) {    	
-    	if (session.getAttribute("userLogin") == null)
-    		return "redirect:/Login";
-    	
-        return "schoolForm";    
-    }
+	@RequestMapping(value = "/Schools")
+	public String listSchools(Model model, HttpSession session) {
+		if (session.getAttribute("userLogin") == null)
+			return "redirect:/Login";
 
-    @RequestMapping(value="/CreateSchool", method=RequestMethod.POST)
-    public String createSchool(@RequestParam(value="schoolName", required=false) String name,
-    		@RequestParam(value="schoolAddress", required=false) String address,
-    		Model model, HttpSession session) {    	
-    	if (session.getAttribute("userLogin") == null)
-    		return "redirect:/Login";
-    	
-    	School school = new School();
-    	school.setName(name);
-    	school.setAddress(address);
-    	
-    	//DatabaseConnector.getInstance().addSchool(school);
-    	schoolRepository.save(school);
-       	//model.addAttribute("schools", DatabaseConnector.getInstance().getSchools());
-    	model.addAttribute("schools", schoolRepository.findAll());
-    	model.addAttribute("message", "Nowa szkoła została dodana");
-         	
-    	return "schoolsList";
-    }
-    
-    @RequestMapping(value="/DeleteSchool", method=RequestMethod.POST)
-    public String deleteSchool(@RequestParam(value="schoolId", required=false) String schoolId,
-    		Model model, HttpSession session) {    	
-    	if (session.getAttribute("userLogin") == null)
-    		return "redirect:/Login";
-    	
-    	//DatabaseConnector.getInstance().deleteSchool(schoolId);
-    	schoolRepository.deleteById(Long.valueOf(schoolId));
-    	
-       	model.addAttribute("schools", schoolRepository.findAll());
-    	model.addAttribute("message", "Szkoła została usunięta");
-         	
-    	return "schoolsList";
-    }
-    
-    @RequestMapping(value="/ShowUpdateSchoolForm")
-    public String showUpdateSchoolForm(Model model, HttpSession session) {    	
-    	if (session.getAttribute("userLogin") == null)
-    		return "redirect:/Login";
-    	
-        return "schoolUpdateForm";    
-    }
+		model.addAttribute("schools", schoolRepository.findAll());
+
+		return "schoolsList";
+	}
+
+	@RequestMapping(value = "/AddSchool")
+	public String displayAddSchoolForm(Model model, HttpSession session) {
+		if (session.getAttribute("userLogin") == null)
+			return "redirect:/Login";
+
+		return "schoolForm";
+	}
+
+	@RequestMapping(value = "/CreateSchool", method = RequestMethod.POST)
+	public String createSchool(@RequestParam(value = "schoolName", required = false) String name,
+			@RequestParam(value = "schoolAddress", required = false) String address, Model model, HttpSession session) {
+		if (session.getAttribute("userLogin") == null)
+			return "redirect:/Login";
+
+		School school = new School();
+		school.setName(name);
+		school.setAddress(address);
+
+		// DatabaseConnector.getInstance().addSchool(school);
+		schoolRepository.save(school);
+		// model.addAttribute("schools", DatabaseConnector.getInstance().getSchools());
+		model.addAttribute("schools", schoolRepository.findAll());
+		model.addAttribute("message", "Nowa szkoła została dodana");
+
+		return "schoolsList";
+	}
+
+	@RequestMapping(value = "/DeleteSchool", method = RequestMethod.POST)
+	public String deleteSchool(@RequestParam(value = "schoolId", required = false) String schoolId, Model model,
+			HttpSession session) {
+		if (session.getAttribute("userLogin") == null)
+			return "redirect:/Login";
+
+		// DatabaseConnector.getInstance().deleteSchool(schoolId);
+		schoolRepository.deleteById(Long.valueOf(schoolId));
+
+		model.addAttribute("schools", schoolRepository.findAll());
+		model.addAttribute("message", "Szkoła została usunięta");
+
+		return "schoolsList";
+	}
+
+	@RequestMapping(value = "/ShowUpdateSchoolForm")
+	public String showUpdateSchoolForm(@RequestParam(value = "schoolId") String schoolId, Model model,
+			HttpSession session) {
+		if (session.getAttribute("userLogin") == null)
+			return "redirect:/Login";
+
+		School school = schoolRepository.findById(Long.valueOf(schoolId)).get();
+		model.addAttribute("school", school);
+		
+		return "schoolUpdateForm";
+	}
 
 }
