@@ -79,4 +79,12 @@ public class StudentController {
 	         	
 	    	return "studentsList";
 	    }
+	    
+	    @RequestMapping(value="/ShowUpdateStudentForm")
+	    public String showUpdateStudentForm(Model model, HttpSession session) {    	
+	    	if (session.getAttribute("userLogin") == null)
+	    		return "redirect:/Login";
+	    	model.addAttribute("classes", schoolClassRepository.findAll());
+	        return "studentForm";    
+	    }
 }

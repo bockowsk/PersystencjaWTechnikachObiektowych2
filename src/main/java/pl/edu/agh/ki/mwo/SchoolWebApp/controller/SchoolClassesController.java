@@ -82,6 +82,16 @@ public class SchoolClassesController {
          	
     	return "schoolClassesList";
     }
+    
+    @RequestMapping(value="/ShowUpdateSchoolClassForm")
+    public String showUpdateSchoolClassForm(Model model, HttpSession session) {    	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+
+       	model.addAttribute("schools", schoolRepository.findAll());
+       	
+        return "schoolClassUpdateForm";    
+    }
 
 
 }

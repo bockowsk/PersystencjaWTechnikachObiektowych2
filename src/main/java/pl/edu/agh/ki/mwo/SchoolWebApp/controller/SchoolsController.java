@@ -74,5 +74,13 @@ public class SchoolsController {
          	
     	return "schoolsList";
     }
+    
+    @RequestMapping(value="/ShowUpdateSchoolForm")
+    public String showUpdateSchoolForm(Model model, HttpSession session) {    	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+    	
+        return "schoolUpdateForm";    
+    }
 
 }
