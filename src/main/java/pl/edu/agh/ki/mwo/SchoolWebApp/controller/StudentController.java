@@ -81,10 +81,13 @@ public class StudentController {
 	    }
 	    
 	    @RequestMapping(value="/ShowUpdateStudentForm")
-	    public String showUpdateStudentForm(Model model, HttpSession session) {    	
+	    public String showUpdateStudentForm(@RequestParam(value = "studentId") Long studentId, Model model, HttpSession session) {    	
 	    	if (session.getAttribute("userLogin") == null)
 	    		return "redirect:/Login";
-	    	model.addAttribute("classes", schoolClassRepository.findAll());
-	        return "studentForm";    
+			Student student = studentRepository.findById(studentId).get();
+			model.addAttribute("student", student);
+			model.addAttribute("schoolClasses", schoolClassRepository.findAll());
+	    	
+	    	return "studentUpdateForm";    
 	    }
 }
