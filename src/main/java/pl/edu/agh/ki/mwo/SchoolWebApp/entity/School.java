@@ -1,24 +1,25 @@
 package pl.edu.agh.ki.mwo.SchoolWebApp.entity;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="schools")
+@Table(name = "schools")
 public class School implements java.io.Serializable {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String address;
-	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="school")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
 	private Set<SchoolClass> schoolClasses;
 
 	public School() {
@@ -60,17 +61,17 @@ public class School implements java.io.Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public void addSchoolClass(SchoolClass schoolClass) {
-		if (this.schoolClasses==null) {
-			this.schoolClasses=new HashSet<SchoolClass>();
+		if (this.schoolClasses == null) {
+			this.schoolClasses = new HashSet<SchoolClass>();
 		}
 		this.schoolClasses.add(schoolClass);
 		schoolClass.setSchool(this);
 	}
-	
+
 	public String toString() {
 		return "School: " + getName() + " (" + getAddress() + ", " + getClasses().size() + " classes)";
-}
+	}
 
 }

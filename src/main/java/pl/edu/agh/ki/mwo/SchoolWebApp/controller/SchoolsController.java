@@ -96,7 +96,7 @@ public class SchoolsController {
 		School school = schoolRepository.findById(Long.valueOf(schoolId)).get();
 		school.setName(name);
 		school.setAddress(address);
-		//update
+		// update
 		schoolRepository.save(school);
 		model.addAttribute("schools", schoolRepository.findAll());
 		model.addAttribute("message", "Szkola zaktualizowana");

@@ -111,9 +111,9 @@ public class SchoolClassesController {
 		schoolClass.setStartYear(Integer.valueOf(schoolClassStartYear));
 		schoolClass.setCurrentYear(Integer.valueOf(schoolClassCurrentYear));
 		schoolClass.setProfile(schoolClassProfile);
-		
-		School school=schoolRepository.findById(Long.valueOf(schoolClassSchool)).get();
-		
+
+		School school = schoolRepository.findById(Long.valueOf(schoolClassSchool)).get();
+
 		schoolClass.setSchool(school);
 		// update
 		schoolClassRepository.save(schoolClass);
