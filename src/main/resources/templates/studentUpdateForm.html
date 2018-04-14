@@ -25,12 +25,17 @@
 						th:value="${student.pesel}" /></td>
 				</tr>
 				<tr>
+					<td><input type="hidden" name="studentId"
+						th:value="${student.id}" /></td>
+				</tr>
+				<tr>
 					<td>Klasa:</td>
 					<td><select class="form-control" name="studentClass"
 						id="studentClass">
 							<option selected="selected" th:value="${student.schoolClass.id}"
 								th:text="${student.schoolClass.profile} + ', ' + ${student.schoolClass.school.name}"></option>
-							<option th:each="class1: ${schoolClasses}" th:value="${class1.id}"
+							<option th:each="class1: ${schoolClasses}"
+								th:value="${class1.id}"
 								th:text="${class1.profile} + ', ' + ${class1.school.name}"></option>
 					</select></td>
 				</tr>

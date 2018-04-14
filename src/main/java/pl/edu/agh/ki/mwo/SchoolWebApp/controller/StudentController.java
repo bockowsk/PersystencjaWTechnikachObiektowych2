@@ -90,4 +90,34 @@ public class StudentController {
 	    	
 	    	return "studentUpdateForm";    
 	    }
+	    
+		@RequestMapping(value = "/UpdateStudent", method = RequestMethod.POST)
+		public String updateSchoolClass(
+				@RequestParam(value = "studentName", required = false) String studentName,
+				@RequestParam(value = "studentSurname", required = false) String studentSurname,
+				@RequestParam(value = "studentPesel") String studentPesel,
+				@RequestParam(value = "studentId") Long studentId,
+				@RequestParam(value = "studentClass") Long studentClass,
+				Model model, HttpSession session) {
+
+			if (session.getAttribute("userLogin") == null)
+				return "redirect:/Login";
+
+			Student student=studentRepository.findById(studentId).get();
+			student.setName(studentName);
+			student.setSurname(studentName);
+			student.setPesel(studentPesel);
+			
+			SchoolClass schoolClass=schoolClassRepository.findById(studentClass).get();
+			
+			student.setSchoolClass(schoolClass);
+
+			// update
+			studentRepository.save(student);
+			
+	       	model.addAttribute("students", studentRepository.findAll());
+	    	model.addAttribute("message", "Student zostal dodany");
+	         	
+	    	return "studentsList";
+		}
 }
