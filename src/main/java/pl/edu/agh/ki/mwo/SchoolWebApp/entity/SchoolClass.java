@@ -26,8 +26,7 @@ public class SchoolClass implements java.io.Serializable {
 	@JoinColumn(name = "school_id", referencedColumnName = "id")
 	private School school;
 
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH }, mappedBy = "schoolClass")
+	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH  }, mappedBy = "schoolClass")
 	private Set<Student> students;
 
 	public SchoolClass() {
@@ -88,5 +87,11 @@ public class SchoolClass implements java.io.Serializable {
 
 	public String toString() {
 		return "Class: " + profile + " (Started: " + getStartYear() + ", Current year: " + getCurrentYear() + ")";
+	}
+	@PreRemove
+	private void removeAssociationsWithChilds() {
+	   for (Student s : students) {
+	        s.setSchoolClass(null);
+	   }
 	}
 }

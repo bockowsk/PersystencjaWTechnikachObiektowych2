@@ -22,7 +22,7 @@ public class Student implements java.io.Serializable {
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	@JoinColumn(name = "class_id")
+	@JoinColumn(name = "class_id",nullable=true)
 	private SchoolClass schoolClass;
 
 	public long getId() {

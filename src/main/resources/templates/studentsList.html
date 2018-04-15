@@ -51,9 +51,11 @@
 				<td><span th:text="${student.id}" /></td>
 				<td><span th:text="${student.name}" /></td>
 				<td><span th:text="${student.surname}" /></td>
-				<td><span th:text="${student.schoolClass.profile}" /></td>
+				<td th:if="${student.schoolClass != null}"><span th:text="${student.schoolClass.profile}" /></td>
+				<td th:if="${student.schoolClass == null}">NIE MA</td>
 				<td><span th:text="${student.pesel}" /></td>
-				<td><span th:text="${student.schoolClass.school.name}" /></td>
+				<td th:if="${student.schoolClass != null}"><span th:text="${student.schoolClass.school.name}" /></td>
+				<td th:if="${student.schoolClass == null}">NIE MA</td>
 				<td>
 					<form action="DeleteStudent" method="POST">
 						<input type="hidden" name="studentId" th:value="${student.id}" />
