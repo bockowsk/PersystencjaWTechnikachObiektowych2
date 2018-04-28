@@ -24,8 +24,8 @@ public class SchoolsController {
 
 	@RequestMapping(value = "/Schools")
 	public String listSchools(Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		model.addAttribute("schools", schoolRepository.findAll());
 
@@ -34,8 +34,8 @@ public class SchoolsController {
 
 	@RequestMapping(value = "/AddSchool")
 	public String displayAddSchoolForm(Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		return "schoolForm";
 	}
@@ -43,8 +43,8 @@ public class SchoolsController {
 	@RequestMapping(value = "/CreateSchool", method = RequestMethod.POST)
 	public String createSchool(@RequestParam(value = "schoolName", required = false) String name,
 			@RequestParam(value = "schoolAddress", required = false) String address, Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		School school = new School();
 		school.setName(name);
@@ -62,8 +62,8 @@ public class SchoolsController {
 	@RequestMapping(value = "/DeleteSchool", method = RequestMethod.POST)
 	public String deleteSchool(@RequestParam(value = "schoolId", required = false) String schoolId, Model model,
 			HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		// DatabaseConnector.getInstance().deleteSchool(schoolId);
 		schoolRepository.deleteById(Long.valueOf(schoolId));
@@ -77,8 +77,8 @@ public class SchoolsController {
 	@RequestMapping(value = "/ShowUpdateSchoolForm")
 	public String showUpdateSchoolForm(@RequestParam(value = "schoolId") String schoolId, Model model,
 			HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		School school = schoolRepository.findById(Long.valueOf(schoolId)).get();
 		model.addAttribute("school", school);
@@ -90,8 +90,8 @@ public class SchoolsController {
 	public String updateSchool(@RequestParam(value = "schoolName", required = false) String name,
 			@RequestParam(value = "schoolAddress", required = false) String address,
 			@RequestParam(value = "schoolId") String schoolId, Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		School school = schoolRepository.findById(Long.valueOf(schoolId)).get();
 		school.setName(name);

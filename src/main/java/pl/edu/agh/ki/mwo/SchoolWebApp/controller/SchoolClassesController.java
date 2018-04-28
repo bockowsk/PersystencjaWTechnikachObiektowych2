@@ -25,8 +25,8 @@ public class SchoolClassesController {
 
 	@RequestMapping(value = "/SchoolClasses")
 	public String listSchoolClass(Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		// model.addAttribute("schoolClasses",
 		// DatabaseConnector.getInstance().getSchoolClasses());
@@ -37,8 +37,8 @@ public class SchoolClassesController {
 
 	@RequestMapping(value = "/AddSchoolClass")
 	public String displayAddSchoolClassForm(Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		model.addAttribute("schools", schoolRepository.findAll());
 
@@ -51,8 +51,8 @@ public class SchoolClassesController {
 			@RequestParam(value = "schoolClassProfile", required = false) String profile,
 			@RequestParam(value = "schoolClassSchool", required = false) String schoolId, Model model,
 			HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		SchoolClass schoolClass = new SchoolClass();
 		schoolClass.setStartYear(Integer.valueOf(startYear));
@@ -72,8 +72,8 @@ public class SchoolClassesController {
 	@RequestMapping(value = "/DeleteSchoolClass", method = RequestMethod.POST)
 	public String deleteSchoolClass(@RequestParam(value = "schoolClassId", required = false) String schoolClassId,
 			Model model, HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		// DatabaseConnector.getInstance().deleteSchoolClass(schoolClassId);
 		schoolClassRepository.deleteById(Long.valueOf(schoolClassId));
@@ -86,8 +86,8 @@ public class SchoolClassesController {
 	@RequestMapping(value = "/ShowUpdateSchoolClassForm")
 	public String showUpdateSchoolClassForm(@RequestParam(value = "schoolClassId") String schoolClassId, Model model,
 			HttpSession session) {
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		SchoolClass schoolClass = schoolClassRepository.findById(Long.valueOf(schoolClassId)).get();
 		model.addAttribute("schoolClass", schoolClass);
@@ -104,8 +104,8 @@ public class SchoolClassesController {
 			@RequestParam(value = "schoolClassId") String schoolClassId,
 			@RequestParam(value = "schoolClassSchool") String schoolClassSchool, Model model, HttpSession session) {
 
-		if (session.getAttribute("userLogin") == null)
-			return "redirect:/Login";
+		// if (session.getAttribute("userLogin") == null)
+			// return "redirect:/Login";
 
 		SchoolClass schoolClass = schoolClassRepository.findById(Long.valueOf(schoolClassId)).get();
 		schoolClass.setStartYear(Integer.valueOf(schoolClassStartYear));
